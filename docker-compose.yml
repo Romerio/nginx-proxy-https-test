@@ -15,7 +15,7 @@ services:
       networks:
         - ippon
       labels:
-        - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+        - 'com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true'
   node-test1:
     image: meronix/node-test1
     hostname: foo1.bar.com # foo1.bar.com / test1.romerio.site
