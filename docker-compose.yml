@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nginx-proxy:
+      image: jwilder/nginx-proxy
+      ports:
+        - "80:80"
+      volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+        - /apps/docker-articles/nginx/vhost.d:/etc/nginx/vhost.d
+      networks:
+        - ippon
+  node-test1:
+    image: meronix/node-test1
+    hostname: foo1.bar.com # foo1.bar.com / test1.romerio.site
+    networks:
+      - ippon
+    environment:
+      VIRTUAL_HOST: foo1.bar.com # foo1.bar.com / test1.romerio.site
+      VIRTUAL_PORT: 3000
+  node-test2:
+    image: meronix/node-test2
+    hostname: foo2.bar.com # foo2.bar.com / test2.romerio.site
+    networks:
+      - ippon
+    environment:
+      VIRTUAL_HOST: foo2.bar.com # foo2.bar.com / test2.romerio.site
+      VIRTUAL_PORT: 3000
+
+networks:
+  ippon:
+    driver: bridge # Use the bridge driver
