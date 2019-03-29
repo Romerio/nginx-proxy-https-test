@@ -3,6 +3,7 @@ version: '3'
 services:
   nginx-proxy:
       image: jwilder/nginx-proxy
+      container_name: nginx-proxy
       ports:
         - "80:80"
         - "443:443"
@@ -14,7 +15,7 @@ services:
       networks:
         - ippon
       labels:
-        com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+        - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
   node-test1:
     image: meronix/node-test1
     hostname: foo1.bar.com # foo1.bar.com / test1.romerio.site
@@ -37,12 +38,15 @@ services:
       LETSENCRYPT_EMAIL: romerio.unix@gmail.com
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:v1.5
+    depends_on:
+      - "nginx-proxy"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /apps/docker-articles/nginx/vhost.d:/etc/nginx/vhost.d
       - /apps/docker-articles/nginx/certs:/etc/nginx/certs:rw
       - /apps/docker-articles/nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 networks:
   ippon:
     driver: bridge # Use the bridge driver
+
