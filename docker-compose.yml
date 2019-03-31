@@ -49,4 +49,15 @@ services:
 networks:
   ippon:
     driver: bridge # Use the bridge driver
+    name: 'ippon'
 
+# docker run --detach \
+#    --network ippon \
+#    --name grafana \
+#    --env "VIRTUAL_HOST=grafana.romerio.site" \
+#    --env "VIRTUAL_PORT=3000" \
+#    --env "LETSENCRYPT_HOST=grafana.romerio.site" \
+#    --env "LETSENCRYPT_EMAIL=romerio.unix@gmail.com" \
+#    grafana/grafana
+#
+# docker run --detach --network ippon --name grafana --env "VIRTUAL_HOST=grafana.romerio.site" --env "VIRTUAL_PORT=3000" --env "LETSENCRYPT_HOST=grafana.romerio.site" --env "LETSENCRYPT_EMAIL=romerio.unix@gmail.com" grafana/grafana
