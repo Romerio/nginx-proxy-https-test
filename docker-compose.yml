@@ -50,7 +50,7 @@ services:
       REGISTRY_HTTP_TLS_KEY: /certs/domain.key
     volumes:
       - /mnt/registry/registry-data:/var/lib/registry
-      - /home/koruja/projetos/certs:/certs
+      - /apps/docker-articles/nginx/certs:/certs
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
