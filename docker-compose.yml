@@ -45,7 +45,7 @@ services:
       LETSENCRYPT_HOST: registry.romerio.site
       LETSENCRYPT_EMAIL: romerio.unix@gmail.com
     volumes:
-      - $(pwd)/registry-data:/var/lib/registry
+      - /mnt/registry/registry-data:/var/lib/registry
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
