@@ -36,6 +36,21 @@ services:
       VIRTUAL_PORT: 3000
       LETSENCRYPT_HOST: test2.romerio.site
       LETSENCRYPT_EMAIL: romerio.unix@gmail.com
+  registry:
+    image: registry
+    hostname: registry.romerio.site # foo2.bar.com / test2.romerio.site
+    ports:
+      - "5000:5000"
+    environment:
+      VIRTUAL_HOST: registry.romerio.site # foo2.bar.com / test2.romerio.site
+      VIRTUAL_PORT: 5000
+      LETSENCRYPT_HOST: registry.romerio.site
+      LETSENCRYPT_EMAIL: romerio.unix@gmail.com
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    volumes:
+      - /mnt/registry/registry-data:/var/lib/registry
+      - /home/koruja/projetos/certs:/certs
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
